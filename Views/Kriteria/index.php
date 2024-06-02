@@ -1,0 +1,50 @@
+<?php require_once("Views/Layout/index.php"); ?>
+
+<?php echo $data['title'] ?>
+<div class="card">
+    <div class="card-header">
+        <a href="<?= base_url() ?>kriteria/tambah" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i></a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered datatable">
+                <thead>
+                    <tr>
+                        <th width="2px">No</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th>Attribut</th>
+                        <th>Bobot</th>
+                        <th>Sub Kriteria</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1;
+                    foreach ($data['items'] as $item) : ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $item['kode'] ?></td>
+                            <td><?= $item['nama'] ?></td>
+                            <td><?= $item['attribut'] ?></td>
+                            <td><?= $item['bobot'] ?></td>
+                            <td>
+                                <a href="<?= base_url() ?>subkriteria/index?idk=<?= $item['id'] ?>" class="btn btn-primary btn-sm text-white">
+                                    <i class="fa fa-list ul"></i></a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url() ?>kriteria/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
+                                    <i class="fa fa-edit"></i></a>
+                                </a>
+                                <a href="<?= base_url() ?>kriteria/delete?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm text-white">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
