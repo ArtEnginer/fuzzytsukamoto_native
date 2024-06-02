@@ -20,7 +20,6 @@
                     <tr>
                         <th width="2px">No</th>
                         <th>Nama</th>
-                        <th>Bobot</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -30,7 +29,6 @@
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['bobot'] ?></td>
                             <td>
                                 <a href="<?= base_url() ?>subkriteria/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
                                     <i class="fa fa-edit"></i></a>

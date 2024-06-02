@@ -14,11 +14,6 @@
                         <label for="bobot">Nama</label>
                         <input type="text" name="nama" id="nama" class="form-control" value="<?= $data['item']['nama'] ?>">
                     </div>
-
-                    <div class="form-group">
-                        <label for="bobot">Bobot</label>
-                        <input type="text" name="bobot" id="bobot" class="form-control" value="<?= $data['item']['bobot'] ?>">
-                    </div>
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>subkriteria/index?idk=<?= $data['item']['kriteria_id'] ?>" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>

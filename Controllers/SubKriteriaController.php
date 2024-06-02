@@ -7,13 +7,13 @@ class SubKriteriaController
 
     public function __construct()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (!isset($_SESSION['user'])) {
-            header('Location: ' . base_url() . 'auth/login');
-            exit();
-        }
+        // if (session_status() == PHP_SESSION_NONE) {
+        //     session_start();
+        // }
+        // if (!isset($_SESSION['user'])) {
+        //     header('Location: ' . base_url() . 'auth/login');
+        //     exit();
+        // }
         $koneksi = new Koneksi();
         $this->SubKriteriaModel = new SubKriteriaModel($koneksi);
         $this->active = 'kriteria';
@@ -49,7 +49,6 @@ class SubKriteriaController
         $data = [
             'kriteria_id'  => $_POST['kriteria_id'],
             'nama'  => $_POST['nama'],
-            'bobot' => $_POST['bobot'],
         ];
         $this->SubKriteriaModel->add($data);
         header('location: ' . base_url() . 'subkriteria/index?idk=' . $data['kriteria_id']);
@@ -82,7 +81,6 @@ class SubKriteriaController
             'id'    => $_POST['id'],
             'kriteria_id'  => $_POST['kriteria_id'],
             'nama'  => $_POST['nama'],
-            'bobot' => $_POST['bobot'],
         ];
         $this->SubKriteriaModel->update($data);
         header('location: ' . base_url() . 'subkriteria/index?idk=' . $data['kriteria_id']);
