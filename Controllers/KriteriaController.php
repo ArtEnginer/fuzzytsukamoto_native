@@ -46,19 +46,10 @@ class KriteriaController
     public function simpan()
     {
         $data = [
-            'kode'  => $_POST['kode'],
             'nama'  => $_POST['nama'],
-            'attribut' => $_POST['attribut'],
-            'bobot' => $_POST['bobot'],
         ];
-
-        $kode = $this->KriteriaModel->checkKode($data['kode']);
-        if ($kode) {
-            header('location: ' . base_url() . 'kriteria/tambah');
-        } else {
-            $this->KriteriaModel->add($data);
-            header('location: ' . base_url() . 'kriteria/index');
-        }
+        $this->KriteriaModel->add($data);
+        header('location: ' . base_url() . 'kriteria/index');
     }
 
     public function delete()
@@ -85,19 +76,9 @@ class KriteriaController
     {
         $data = [
             'id'    => $_POST['id'],
-            'kode'  => $_POST['kode'],
             'nama'  => $_POST['nama'],
-            'attribut' => $_POST['attribut'], // Change 'atribut' to 'attribut
-            'bobot' => $_POST['bobot'],
         ];
-
-
-        $kode = $this->KriteriaModel->checkKode($data['kode']);
-        if ($kode) {
-            header('location: ' . base_url() . 'kriteria/edit?id=' . $data['id']);
-        } else {
-            $this->KriteriaModel->update($data);
-            header('location: ' . base_url() . 'kriteria/index');
-        }
+        $this->KriteriaModel->update($data);
+        header('location: ' . base_url() . 'kriteria/index');
     }
 }

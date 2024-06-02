@@ -8,7 +8,7 @@ class KriteriaModel
         $koneksi = new Koneksi();
         $this->koneksi = $koneksi->getKoneksi();
         $this->table = 'tb_kriteria';
-        $this->fillable = ['kode', 'nama', 'attribut', 'bobot', 'created_at', 'updated_at'];
+        $this->fillable = ['nama', 'created_at', 'updated_at'];
     }
     public function all()
     {

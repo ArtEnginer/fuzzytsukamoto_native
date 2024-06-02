@@ -12,10 +12,7 @@
                 <thead>
                     <tr>
                         <th width="2px">No</th>
-                        <th>Kode</th>
                         <th>Nama</th>
-                        <th>Attribut</th>
-                        <th>Bobot</th>
                         <th>Sub Kriteria</th>
                         <th>Aksi</th>
                     </tr>
@@ -25,10 +22,7 @@
                     foreach ($data['items'] as $item) : ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $item['kode'] ?></td>
                             <td><?= $item['nama'] ?></td>
-                            <td><?= $item['attribut'] ?></td>
-                            <td><?= $item['bobot'] ?></td>
                             <td>
                                 <a href="<?= base_url() ?>subkriteria/index?idk=<?= $item['id'] ?>" class="btn btn-primary btn-sm text-white">
                                     <i class="fa fa-list ul"></i></a>
