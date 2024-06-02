@@ -8,7 +8,7 @@ class AlternatifModel
         $koneksi = new Koneksi();
         $this->koneksi = $koneksi->getKoneksi();
         $this->table = 'tb_alternatif';
-        $this->fillable = ['nama', 'kelas', 'jenis_kelamin', 'created_at', 'updated_at'];
+        $this->fillable = ['nama', 'nip', 'created_at', 'updated_at'];
     }
     public function all()
     {

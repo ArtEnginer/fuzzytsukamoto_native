@@ -13,15 +13,8 @@
                         <input type="text" name="nama" id="nama" class="form-control" value="<?= $data['item']['nama'] ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label for="kelas">Kelas</label>
-                        <input type="number" name="kelas" id="kelas" class="form-control" value="<?= $data['item']['kelas'] ?>">
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="jenis_kelamin">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                            <option value="L" <?= $data['item']['jenis_kelamin'] == 'L' ? 'selected' : '' ?>>Laki-laki</option>
-                            <option value="P" <?= $data['item']['jenis_kelamin'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
-                        </select>
+                        <label for="nip">NIP</label>
+                        <input type="number" name="nip" id="nip" class="form-control" value="<?= $data['item']['nip'] ?>">
                     </div>
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>alternatif/index" class="btn btn-secondary btn-sm">

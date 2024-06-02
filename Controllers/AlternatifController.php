@@ -7,13 +7,13 @@ class AlternatifController
 
     public function __construct()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (!isset($_SESSION['user'])) {
-            header('Location: ' . base_url() . 'auth/login');
-            exit();
-        }
+        // if (session_status() == PHP_SESSION_NONE) {
+        //     session_start();
+        // }
+        // if (!isset($_SESSION['user'])) {
+        //     header('Location: ' . base_url() . 'auth/login');
+        //     exit();
+        // }
         $koneksi = new Koneksi();
         $this->alternatifModel = new AlternatifModel($koneksi);
         $this->active = 'alternatif';
@@ -46,11 +46,8 @@ class AlternatifController
     {
         $data = [
             'nama'          => $_POST['nama'],
-            'kelas'           => $_POST['kelas'],
-            'jenis_kelamin'  => $_POST['jenis_kelamin'],
+            'nip'          => $_POST['nip'],
         ];
-
-
         $this->alternatifModel->add($data);
 
         header('location: ' . base_url() . 'alternatif/index');
@@ -80,10 +77,9 @@ class AlternatifController
     public function update()
     {
         $data = [
-            'id'            => $_POST['id'],
+            'id'           => $_POST['id'],
             'nama'          => $_POST['nama'],
-            'kelas'           => $_POST['kelas'],
-            'jenis_kelamin'  => $_POST['jenis_kelamin'],
+            'nip'          => $_POST['nip'],
         ];
 
         $this->alternatifModel->update($data);

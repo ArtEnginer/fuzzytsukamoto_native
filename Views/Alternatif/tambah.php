@@ -12,15 +12,8 @@
                         <input type="text" name="nama" id="nama" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <input type="number" name="kelas" id="kelas" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="jenis_kelamin">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                            <option value="L">Laki-laki</option>
-                            <option value="P">Perempuan</option>
-                        </select>
+                        <label for="nip">NIP</label>
+                        <input type="number" name="nip" id="nip" class="form-control">
                     </div>
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>alternatif/index" class="btn btn-secondary btn-sm">
