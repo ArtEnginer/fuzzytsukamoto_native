@@ -16,6 +16,7 @@
                                 </P>
                             </div>
                             <div class="card-body">
+                                <input type="hidden" name="id" value="<?= $data['ruleData']['id'] ?>">
                                 <div class="form-group mt-3">
                                     <?php foreach ($data['kriteria'] as $key => $value) : ?>
                                         <?php
@@ -26,7 +27,7 @@
                                         <select name="kriteria<?= $value['id'] ?>" id="kriteria<?= $value['id'] ?>" class="form-control">
                                             <option value="">Pilih <?= $value['nama'] ?></option>
                                             <?php foreach ($subkriteria as $key => $item) : ?>
-                                                <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
+                                                <option value="<?= $item['id'] ?>" <?php if ($data['rule'][$value['id']] == $item['id']) echo 'selected'; ?>><?= $item['nama'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     <?php endforeach; ?>
@@ -39,12 +40,11 @@
                         <!-- select baik,cukup,kurang -->
                         <select name="output" id="output" class="form-control">
                             <option value="">Pilih Output</option>
-                            <option value="baik">Baik</option>
-                            <option value="cukup">Cukup</option>
-                            <option value="kurang">Kurang</option>
+                            <option value="baik" <?php if ($data['ruleData']['output'] == 'baik') echo 'selected'; ?>>Baik</option>
+                            <option value="cukup" <?php if ($data['ruleData']['output'] == 'cukup') echo 'selected'; ?>>Cukup</option>
+                            <option value="kurang" <?php if ($data['ruleData']['output'] == 'kurang') echo 'selected'; ?>>Kurang</option>
                         </select>
                     </div>
-
 
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>rules/index" class="btn btn-secondary btn-sm">

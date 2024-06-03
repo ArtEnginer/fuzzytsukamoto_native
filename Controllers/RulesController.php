@@ -29,22 +29,109 @@ class RulesController
             'title' => 'Daftar Rules',
             'active' => $this->active,
             'items' => $this->RulesModel->all(),
+            'displayRules' => $this,
             'content' => 'Views/Rules/index.php',
         ];
-
         include_once('Views/Layout/index.php');
     }
 
-    public function create()
+    public function tambah()
     {
         $data = [
             'title' => 'Tambah Rules',
             'active' => $this->active,
             'kriteria' => $this->KriteriaModel->all(),
             'subkriteria' => $this->SubKriteriaModel,
-            'content' => 'Views/Rules/create.php',
+            'content' => 'Views/Rules/tambah.php',
         ];
 
+
+        if ($_POST) {
+            $rule = [];
+            foreach ($_POST as $key => $value) {
+                if (strpos($key, 'kriteria') !== false) {
+                    // Mendapatkan ID kriteria dari nama field
+                    $kriteriaId = str_replace('kriteria', '', $key);
+                    $rule[$kriteriaId] = $value;
+                }
+            }
+            $data = [
+                'rule' => json_encode($rule),
+                'output' => $_POST['output'],
+            ];
+            $this->RulesModel->add($data);
+            header('Location: ' . base_url() . 'rules/index');
+        }
+
         include_once('Views/Layout/index.php');
+    }
+
+    // edit
+    public function edit()
+    {
+        $id = $_GET['id'];
+        $ruleData = $this->RulesModel->show($id);
+        if (!$ruleData) {
+            header('Location: ' . base_url() . 'rules/index');
+            exit;
+        }
+
+        // Decode the rule's JSON data to retrieve criteria and their subcriteria
+        $rule = json_decode($ruleData['rule'], true);
+
+        $data = [
+            'title' => 'Edit Rules',
+            'active' => $this->active,
+            'kriteria' => $this->KriteriaModel->all(),
+            'subkriteria' => $this->SubKriteriaModel,
+            'ruleData' => $ruleData,
+            'rule' => $rule,
+            'content' => 'Views/Rules/edit.php',
+        ];
+
+        if ($_POST) {
+            $updatedRule = [];
+            foreach ($_POST as $key => $value) {
+                if (strpos($key, 'kriteria') !== false) {
+                    // Mendapatkan ID kriteria dari nama field
+                    $kriteriaId = str_replace('kriteria', '', $key);
+                    $updatedRule[$kriteriaId] = $value;
+                }
+            }
+            $dataToUpdate = [
+                'id' => $_POST['id'], // Add the rule's ID to the data to update
+                'rule' => json_encode($updatedRule),
+                'output' => $_POST['output'],
+            ];
+            $this->RulesModel->update($dataToUpdate);
+            header('Location: ' . base_url() . 'rules/index');
+        }
+
+        include_once('Views/Layout/index.php');
+    }
+
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $this->RulesModel->delete($id);
+        header('Location: ' . base_url() . 'rules/index');
+    }
+
+    // Additional function to convert rule JSON to readable format
+    public function displayRule($ruleJson)
+    {
+        $ruleArray = json_decode($ruleJson, true);
+        $result = "IF ";
+
+        foreach ($ruleArray as $kriteriaId => $subkriteriaId) {
+            $kriteriaName = $this->KriteriaModel->show($kriteriaId)['nama'];
+            $subkriteriaName = $this->SubKriteriaModel->find($subkriteriaId)['nama'];
+            $result .= "{$kriteriaName} $subkriteriaName AND ";
+        }
+
+        $result = rtrim($result, ' AND ') . " THEN";
+
+        return $result;
     }
 }

@@ -14,7 +14,6 @@
                     <tr>
                         <th width="2px">No</th>
                         <th>Rule</th>
-                        <th>Output</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -23,13 +22,12 @@
                     foreach ($data['items'] as $item) : ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $item['rule'] ?></td>
-                            <td><?= $item['output'] ?></td>
+                            <td><?= $data['displayRules']->displayRule($item['rule']); ?> <?= $item['output'] ?></td>
                             <td>
-                                <a href="<?= base_url() ?>alternatif/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
+                                <a href="<?= base_url() ?>rules/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
                                     <i class="fa fa-edit"></i></a>
                                 </a>
-                                <a href="<?= base_url() ?>alternatif/delete?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm text-white">
+                                <a href="<?= base_url() ?>rules/delete?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm text-white">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

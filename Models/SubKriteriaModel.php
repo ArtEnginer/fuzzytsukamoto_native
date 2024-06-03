@@ -59,7 +59,7 @@ class SubKriteriaModel
         $this->koneksi->query($query);
     }
 
-    public function show($id)
+    public function find($id)
     {
         $query = "SELECT * FROM $this->table WHERE id = $id";
         $result = $this->koneksi->query($query);
@@ -92,18 +92,5 @@ class SubKriteriaModel
         $this->koneksi->query($query);
 
         return $this->koneksi->affected_rows;
-    }
-
-    public function checkKode($kode = null)
-    {
-        //    cek update or add action
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $query = "SELECT * FROM $this->table WHERE kode = '$kode' AND id != $id";
-        } else {
-            $query = "SELECT * FROM $this->table WHERE kode = '$kode'";
-        }
-        $result = $this->koneksi->query($query);
-        return $result->num_rows > 0;
     }
 }

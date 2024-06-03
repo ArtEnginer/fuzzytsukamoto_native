@@ -8,7 +8,7 @@ class RulesModel
         $koneksi = new Koneksi();
         $this->koneksi = $koneksi->getKoneksi();
         $this->table = 'tb_rules';
-        $this->fillable = ['rules', 'output', 'created_at', 'updated_at'];
+        $this->fillable = ['rule', 'output', 'created_at', 'updated_at'];
     }
     public function all()
     {
