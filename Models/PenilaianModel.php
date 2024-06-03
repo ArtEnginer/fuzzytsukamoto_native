@@ -8,7 +8,7 @@ class PenilaianModel
         $koneksi = new Koneksi();
         $this->koneksi = $koneksi->getKoneksi();
         $this->table = 'tb_penilaian';
-        $this->fillable = ['alternatif_id', 'sub_kriteria_id'];
+        $this->fillable = ['alternatif_id', 'nilai'];
     }
     public function all()
     {

@@ -30,17 +30,14 @@
                         <div class="mb-3 row">
                             <label for="kriteria_id" class="col-sm-3 col-form-label"><?= $k['nama'] ?></label>
                             <div class="col-sm-9">
-                                <select class="form-select" name="sub_kriteria_id[<?= $k['id'] ?>]" id="sub_kriteria_id">
-                                    <option value="">Pilih Sub Kriteria</option>
-                                    <?php foreach ($data['sub_kriteria'] as $item) : ?>
-                                        <?php if ($item['kriteria_id'] == $k['id']) : ?>
-                                            <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
+                                <!-- using range input -->
+                                <input type="range" class="form-range" name="sub_kriteria_id[<?= $k['id'] ?>]" id="sub_kriteria_id_<?= $k['id'] ?>" min="1" max="100" value="1" oninput="updateRangeValue(<?= $k['id'] ?>)">
+                                <span id="rangeValue_<?= $k['id'] ?>">1</span>
                             </div>
                         </div>
                     <?php endforeach; ?>
+
+
 
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>penilaian/index" class="btn btn-secondary btn-sm">
@@ -53,3 +50,10 @@
         </div>
     </div>
 </div>
+<script>
+    function updateRangeValue(id) {
+        var range = document.getElementById('sub_kriteria_id_' + id);
+        var valueSpan = document.getElementById('rangeValue_' + id);
+        valueSpan.innerHTML = range.value;
+    }
+</script>

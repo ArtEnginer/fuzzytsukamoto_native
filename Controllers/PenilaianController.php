@@ -9,13 +9,13 @@ class PenilaianController
 
     public function __construct()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (!isset($_SESSION['user'])) {
-            header('Location: ' . base_url() . 'auth/login');
-            exit();
-        }
+        // if (session_status() == PHP_SESSION_NONE) {
+        //     session_start();
+        // }
+        // if (!isset($_SESSION['user'])) {
+        //     header('Location: ' . base_url() . 'auth/login');
+        //     exit();
+        // }
         $koneksi = new Koneksi();
         $this->PenilaianModel = new PenilaianModel($koneksi);
         $this->KriteriaModel = new KriteriaModel($koneksi);
@@ -57,7 +57,7 @@ class PenilaianController
     {
         $data = [
             'alternatif_id' => $_POST['alternatif_id'],
-            'sub_kriteria_id' => json_encode($_POST['sub_kriteria_id']),
+            'nilai' => json_encode($_POST['sub_kriteria_id']),
         ];
 
         $this->PenilaianModel->add($data);
@@ -85,6 +85,7 @@ class PenilaianController
             'subkriteria' => $this->SubKriteriaModel->all(),
             'content'     => 'Views/Penilaian/edit.php',
         ];
+
         include_once('Views/Layout/index.php');
     }
 
@@ -93,7 +94,7 @@ class PenilaianController
         $data = [
             'id' => $_GET['id'], // tambahkan ini agar tidak error 'undefined index: id
             'alternatif_id' => $_POST['alternatif_id'],
-            'sub_kriteria_id' => json_encode($_POST['sub_kriteria_id']),
+            'nilai' => json_encode($_POST['nilai']),
         ];
 
         $this->PenilaianModel->update($data);

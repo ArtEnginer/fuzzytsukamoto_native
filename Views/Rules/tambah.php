@@ -39,7 +39,7 @@
                         <!-- select baik,cukup,kurang -->
                         <select name="output" id="output" class="form-control">
                             <option value="">Pilih Output</option>
-                            <option value="baik">Baik</option>
+                            <option value="sangat">Baik</option>
                             <option value="cukup">Cukup</option>
                             <option value="kurang">Kurang</option>
                         </select>

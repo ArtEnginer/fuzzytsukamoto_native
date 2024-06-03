@@ -27,21 +27,14 @@
                     </div>
 
                     <?php
-                    $sub_kriteria_id = json_decode($data['existing_values']['sub_kriteria_id'], true);
+                    $nilai = json_decode($data['existing_values']['nilai'], true);
                     foreach ($data['kriteria'] as $k) : ?>
                         <div class="mb-3 row">
-                            <label for="kriteria_id_<?= $k['id'] ?>" class="col-sm-3 col-form-label"><?= $k['nama'] ?></label>
+                            <label for="kriteria_id" class="col-sm-3 col-form-label"><?= $k['nama'] ?></label>
                             <div class="col-sm-9">
-                                <select class="form-select" name="sub_kriteria_id[<?= $k['id'] ?>]" id="sub_kriteria_id_<?= $k['id'] ?>">
-                                    <option value="">Pilih Sub Kriteria</option>
-                                    <?php foreach ($data['subkriteria'] as $item) : ?>
-                                        <?php if ($item['kriteria_id'] == $k['id']) : ?>
-                                            <option value="<?= $item['id'] ?>" <?= isset($sub_kriteria_id[$k['id']]) && $item['id'] == $sub_kriteria_id[$k['id']] ? 'selected' : '' ?>>
-                                                <?= $item['nama'] ?>
-                                            </option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
+                                <!-- using range input -->
+                                <input type="range" class="form-range" name="nilai[<?= $k['id'] ?>]" id="nilai_<?= $k['id'] ?>" min="1" max="100" value="<?= $nilai[$k['id']] ?>" oninput="updateRangeValue(<?= $k['id'] ?>)">
+                                <span id="rangeValue_<?= $k['id'] ?>"><?= $nilai[$k['id']] ?></span>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -56,3 +49,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Fungsi untuk memperbarui nilai range
+        function updateRangeValue(id) {
+            var range = document.getElementById('nilai_' + id);
+            var valueSpan = document.getElementById('rangeValue_' + id);
+            valueSpan.innerHTML = range.value;
+        }
+
+        // Panggil fungsi updateRangeValue untuk setiap range saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php foreach ($data['kriteria'] as $k) : ?>
+                updateRangeValue(<?= $k['id'] ?>);
+            <?php endforeach; ?>
+        });
+    </script>
