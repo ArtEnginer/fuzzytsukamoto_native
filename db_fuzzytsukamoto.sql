@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 01:10 PM
+-- Generation Time: Jun 04, 2024 at 03:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `tb_alternatif` (
 INSERT INTO `tb_alternatif` (`id`, `nama`, `nip`, `create_at`, `updated_at`) VALUES
 (1, 'RIFAN DANI KHAN', 12344, 0, 0),
 (2, 'BETRAN TORI', 24321, 0, 0),
-(3, 'BENI SUNARYO', 6534231, 0, 0);
+(3, 'BENI SUNARYO', 6534231, 0, 0),
+(4, 'TECHNOSPACE', 214552, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -75,16 +76,20 @@ INSERT INTO `tb_kriteria` (`id`, `nama`, `create_at`, `updated_at`) VALUES
 CREATE TABLE `tb_penilaian` (
   `id` int(11) NOT NULL,
   `alternatif_id` varchar(255) NOT NULL,
-  `nilai` varchar(255) NOT NULL
+  `nilai` varchar(255) NOT NULL,
+  `periode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_penilaian`
 --
 
-INSERT INTO `tb_penilaian` (`id`, `alternatif_id`, `nilai`) VALUES
-(1, '1', '{\"1\":\"85\",\"2\":\"86\",\"3\":\"24\"}'),
-(3, '3', '{\"1\":\"34\",\"2\":\"32\",\"3\":\"17\"}');
+INSERT INTO `tb_penilaian` (`id`, `alternatif_id`, `nilai`, `periode`) VALUES
+(1, '1', '{\"1\":\"85\",\"2\":\"86\",\"3\":\"24\"}', '2024-02'),
+(3, '3', '{\"1\":\"34\",\"2\":\"32\",\"3\":\"17\"}', '2024-06'),
+(4, '2', '{\"1\":\"72\",\"2\":\"75\",\"3\":\"53\"}', '2024-06'),
+(5, '4', '{\"1\":\"72\",\"2\":\"36\",\"3\":\"90\"}', '2024-06'),
+(7, '1', '{\"1\":\"1\",\"2\":\"1\",\"3\":\"1\"}', '2024-06');
 
 -- --------------------------------------------------------
 
@@ -105,7 +110,8 @@ CREATE TABLE `tb_rules` (
 INSERT INTO `tb_rules` (`id`, `rule`, `output`) VALUES
 (1, '{\"1\":\"1\",\"2\":\"4\",\"3\":\"7\"}', 'baik'),
 (2, '{\"1\":\"1\",\"2\":\"4\",\"3\":\"8\"}', 'baik'),
-(3, '{\"1\":\"1\",\"2\":\"4\",\"3\":\"9\"}', 'cukup');
+(3, '{\"1\":\"1\",\"2\":\"4\",\"3\":\"9\"}', 'cukup'),
+(4, '{\"1\":\"1\",\"2\":\"5\",\"3\":\"7\"}', 'baik');
 
 -- --------------------------------------------------------
 
@@ -207,7 +213,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tb_alternatif`
 --
 ALTER TABLE `tb_alternatif`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_kriteria`
@@ -219,13 +225,13 @@ ALTER TABLE `tb_kriteria`
 -- AUTO_INCREMENT for table `tb_penilaian`
 --
 ALTER TABLE `tb_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_rules`
 --
 ALTER TABLE `tb_rules`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_sub_kriteria`

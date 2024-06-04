@@ -11,6 +11,7 @@ class AuthController
 
     public function login()
     {
+
         $data = [
             'title' => 'Login',
         ];

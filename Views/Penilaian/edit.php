@@ -23,7 +23,6 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
-
                     </div>
 
                     <?php
@@ -38,6 +37,13 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <div class="mb-3 row">
+                        <label for="periode" class="col-sm-3 col-form-label">Periode</label>
+                        <div class="col-sm-3">
+                            <input type="month" class="form-control" name="periode" id="periode" value="<?= $data['existing_values']['periode'] ?>">
+                        </div>
+                    </div>
+
                     <div class="form-group mt-3">
                         <a href="<?= base_url() ?>penilaian/index" class="btn btn-secondary btn-sm">
                             <i class="fa fa-arrow-left"></i>

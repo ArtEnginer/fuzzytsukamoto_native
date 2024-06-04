@@ -10,17 +10,11 @@
                     <div class="mb-3 row">
                         <label for="alternatif_id" class="col-sm-3 col-form-label">Alternatif</label>
                         <div class="col-sm-9">
-                            <?php
-                            // Asumsi $penilaian adalah array yang berisi id alternatif yang sudah ada di data penilaian
-                            $penilaian = array_column($data['penilaian'], 'alternatif_id');
-                            ?>
 
                             <select class="form-select" name="alternatif_id" id="alternatif_id">
                                 <option value="">Pilih Alternatif</option>
                                 <?php foreach ($data['alternatif'] as $item) : ?>
-                                    <?php if (!in_array($item['id'], $penilaian)) : ?>
-                                        <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
-                                    <?php endif; ?>
+                                    <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -37,6 +31,12 @@
                         </div>
                     <?php endforeach; ?>
 
+                    <div class="mb-3 row">
+                        <label for="periode" class="col-sm-3 col-form-label">Periode</label>
+                        <div class="col-sm-3">
+                            <input type="month" class="form-control" name="periode" id="periode">
+                        </div>
+                    </div>
 
 
                     <div class="form-group mt-3">

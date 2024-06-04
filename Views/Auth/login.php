@@ -11,17 +11,17 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: #1e2125;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f06, #f79);
+            font-family: 'Roboto', sans-serif;
             overflow: hidden;
         }
 
         .login-container {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 300px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 350px;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -29,41 +29,49 @@
         }
 
         .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
+            margin-bottom: 30px;
+            color: #444;
+            font-size: 24px;
         }
 
         .login-container label {
             display: block;
             text-align: left;
-            margin-bottom: 5px;
-            color: #333;
+            margin-bottom: 8px;
+            color: #444;
+            font-size: 14px;
         }
 
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             box-sizing: border-box;
+            font-size: 14px;
         }
 
         .login-container button {
-            background: #1e2125;
+            background: #f06;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             width: 100%;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .login-container button:hover {
-            background: #8e44ad;
+            background: #e91e63;
+            transform: scale(1.05);
+        }
+
+        .login-container img {
+            margin-bottom: 20px;
         }
 
         @keyframes fadeIn {
@@ -112,14 +120,18 @@
     <div class="background-animation">FUZZY TSUKAMOTO</div>
     <div class="login-container">
         <!-- logo img -->
+        <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo" class="img-fluid" style="width: 85px;">
         <h2>Login</h2>
         <form action="" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
+            <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
         </form>
+
+        <!-- copyright -->
+        <p style="margin-top: 20px;">&copy; <?= date('Y'); ?> - Sistem Pakar Penilaian Karyawan</p>
     </div>
 </body>
 

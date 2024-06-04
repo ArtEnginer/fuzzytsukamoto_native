@@ -34,10 +34,15 @@ class PerhitunganController
     public function index()
     {
         $alternatifs = $this->alternatifModel->all();
-        $penilaians = $this->penilaianModel->all();
         $rules = $this->ruleModel->all();
         $kriterias = $this->kriteriaModel->all();
         $subKriterias = $this->subKriteriaModel->all();
+
+        if ($_POST) {
+            $penilaians = $this->penilaianModel->getByPeriode($_POST['periode']);
+        } else {
+            $penilaians = $this->penilaianModel->all();
+        }
 
         $results = [];
 

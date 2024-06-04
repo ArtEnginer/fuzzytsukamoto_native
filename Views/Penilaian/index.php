@@ -24,6 +24,7 @@ foreach ($data['alternatif'] as $a) {
                     <tr>
                         <th width="2px">No</th>
                         <th>Nama</th>
+                        <th>Periode</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@ foreach ($data['alternatif'] as $a) {
                         <tr>
                             <td><?php echo $index + 1; ?></td>
                             <td><?php echo $alternatifMapping[$item['alternatif_id']]; ?></td>
+                            <td><?php echo $item['periode']; ?></td>
                             <td>
                                 <a href="<?= base_url() ?>penilaian/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
                                     <i class="fa fa-edit text-white"></i></a>

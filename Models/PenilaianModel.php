@@ -8,11 +8,24 @@ class PenilaianModel
         $koneksi = new Koneksi();
         $this->koneksi = $koneksi->getKoneksi();
         $this->table = 'tb_penilaian';
-        $this->fillable = ['alternatif_id', 'nilai'];
+        $this->fillable = ['alternatif_id', 'nilai', 'periode'];
     }
     public function all()
     {
         $query = "SELECT * FROM $this->table";
+        $result = $this->koneksi->query($query);
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+        $result->free();
+        return $data;
+    }
+
+    // getByPeriode method
+    public function getByPeriode($periode)
+    {
+        $query = "SELECT * FROM $this->table WHERE periode = '$periode'";
         $result = $this->koneksi->query($query);
         $data = [];
         while ($row = $result->fetch_assoc()) {

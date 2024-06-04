@@ -21,7 +21,7 @@
         <div class="row card">
             <div class="col-md-12 card-body">
                 <h3 class="text-center fw-bold">
-                    SPK PENILAIAN KARYAWAN MENGGUNAKAN FUZZY LOGIC TSUKAMOTO
+                    SISTEM PAKAR PENILAIAN KARYAWAN MENGGUNAKAN FUZZY LOGIC TSUKAMOTO
                 </h3>
             </div>
             <!-- logo -->
@@ -42,6 +42,18 @@
     <div class="">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
+                <!-- alert for  $_SESSION['error'] and success -->
+                <?php if (isset($_SESSION['error'])) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $_SESSION['error'] ?>
+                    </div> <?php unset($_SESSION['error']);
+                        endif; ?>
+                <?php if (isset($_SESSION['success'])) : ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= $_SESSION['success'] ?>
+                    </div> <?php unset($_SESSION['success']);
+                        endif; ?>
+                <!-- render -->
                 <?php include_once($data['content']); ?>
             </div>
         </div>

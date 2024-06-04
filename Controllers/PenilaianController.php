@@ -57,8 +57,18 @@ class PenilaianController
     {
         $data = [
             'alternatif_id' => $_POST['alternatif_id'],
-            'nilai' => json_encode($_POST['sub_kriteria_id']),
+            'nilai'         => json_encode($_POST['sub_kriteria_id']),
+            'periode'       => $_POST['periode'],
         ];
+
+        $penilaian = $this->PenilaianModel->getByPeriode($data['periode']);
+        foreach ($penilaian as $p) {
+            if ($p['alternatif_id'] == $data['alternatif_id']) {
+                $_SESSION['error'] = 'Alternatif sudah ada pada periode yang sama';
+                header('location: ' . base_url() . 'Penilaian/tambah');
+                exit();
+            }
+        }
 
         $this->PenilaianModel->add($data);
 
@@ -92,9 +102,10 @@ class PenilaianController
     public function update()
     {
         $data = [
-            'id' => $_GET['id'], // tambahkan ini agar tidak error 'undefined index: id
+            'id'            => $_GET['id'],
             'alternatif_id' => $_POST['alternatif_id'],
-            'nilai' => json_encode($_POST['nilai']),
+            'nilai'         => json_encode($_POST['nilai']),
+            'periode'       => $_POST['periode'],
         ];
 
         $this->PenilaianModel->update($data);
