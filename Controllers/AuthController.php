@@ -31,10 +31,10 @@ class AuthController
                     header('Location: ' . base_url() . 'home/index');
                     exit();
                 } else {
-                    $data['error'] = 'Password salah';
+                    $_SESSION['error'] = 'Password salah';
                 }
             } else {
-                $data['error'] = 'Username tidak ditemukan';
+                $_SESSION['error'] = 'Username tidak ditemukan';
             }
         }
 

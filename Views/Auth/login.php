@@ -113,6 +113,14 @@
                 opacity: 0.3;
             }
         }
+
+        .alert {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f44336;
+            color: white;
+        }
     </style>
 </head>
 
@@ -122,6 +130,11 @@
         <!-- logo img -->
         <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo" class="img-fluid" style="width: 85px;">
         <h2>Login</h2>
+        <?php if (isset($_SESSION['error'])) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?= $_SESSION['error'] ?>
+            </div> <?php unset($_SESSION['error']);
+                endif; ?>
         <form action="" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
