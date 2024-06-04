@@ -69,7 +69,7 @@ class SubKriteriaController
         $data = [
             'title' => 'Edit Daftar SubKriteria',
             'active' => $this->active,
-            'item' => $this->SubKriteriaModel->show($id),
+            'item' => $this->SubKriteriaModel->find($id),
             'content' => 'Views/SubKriteria/edit.php',
         ];
         include_once('Views/Layout/index.php');

@@ -25,116 +25,125 @@ class PerhitunganController
 
     public function index()
     {
+        $alternatifs = $this->alternatifModel->all();
         $penilaians = $this->penilaianModel->all();
-        foreach ($penilaians as $penilaian) {
-            $this->calculate($penilaian);
-        }
-    }
+        $rules = $this->ruleModel->all();
+        $kriterias = $this->kriteriaModel->all();
+        $subKriterias = $this->subKriteriaModel->all();
 
-    private function calculate($penilaian)
-    {
-        $nilai = json_decode($penilaian['nilai'], true);
-
-        // Convert all string values to integers
-        foreach ($nilai as $key => $value) {
-            $nilai[$key] = (int)$value;
-        }
-
-        // Defuzzification using Tsukamoto method
         $results = [];
-        $total_alpha = 0;
 
-        foreach ($this->ruleModel->all() as $rule) {
-            $rule_input = json_decode($rule['rule'], true);
-            $alpha_predicate = [];
+        foreach ($penilaians as $penilaian) {
+            $nilai = json_decode($penilaian['nilai'], true);
+            $fuzzyValues = [];
 
-            foreach ($rule_input as $key => $value) {
-                $alpha = $this->fuzzification($nilai[$key], $key, $value);
-                $alpha_predicate[] = $alpha;
-                // Debugging: output the fuzzification values
-                echo "Fuzzification for Kriteria $key with Sub-Kriteria $value is $alpha\n";
+            foreach ($kriterias as $kriteria) {
+                $subKriteria = array_filter($subKriterias, function ($sk) use ($kriteria) {
+                    return $sk['kriteria_id'] == $kriteria['id'];
+                });
+
+                foreach ($subKriteria as $sk) {
+                    $fuzzyValues[$kriteria['id']][$sk['id']] = $this->fuzzify($nilai[$kriteria['id']], $sk);
+                }
             }
 
-            $alpha = min($alpha_predicate);
-            $output_value = $this->convertOutput($rule['output']);
-            $results[] = $alpha * $output_value;
-            $total_alpha += $alpha;
+            $inferenceResults = $this->infer($fuzzyValues, $rules);
+            $defuzzifiedValue = $this->defuzzify($inferenceResults);
 
-            // Debugging: output the intermediate results
-            echo "Rule: " . json_encode($rule_input) . " - Alpha: $alpha - Output Value: $output_value\n";
+            $results[] = [
+                'alternatif' => $penilaian['alternatif_id'],
+                'nilai' => $defuzzifiedValue
+            ];
         }
 
-        $final_value = array_sum($results) / ($total_alpha ?: 1); // Avoid division by zero
+        die(json_encode($results));
 
-        echo "Penilaian Karyawan ID {$penilaian['alternatif_id']} adalah {$final_value}\n";
+        return $results;
     }
 
-    private function fuzzification($nilai, $kriteria_id, $sub_kriteria_id)
+    private function fuzzify($value, $subKriteria)
     {
-        switch ($sub_kriteria_id) {
-            case 1: // Baik
-                return $this->hitungBaik($nilai);
-            case 2: // Cukup
-                return $this->hitungCukup($nilai);
-            case 3: // Kurang
-                return $this->hitungKurang($nilai);
-            default:
+        // Menghitung nilai fuzzy berdasarkan sub kriteria
+        if ($subKriteria['nama'] == 'Baik') {
+            if ($value <= 70) {
                 return 0;
-        }
-    }
-
-    private function hitungBaik($nilai)
-    {
-        if ($nilai <= 70) {
-            return 0;
-        } elseif ($nilai <= 80) {
-            return ($nilai - 70) / 10;
-        } else {
-            return 1;
-        }
-    }
-
-    private function hitungCukup($nilai)
-    {
-        if ($nilai <= 30) {
-            return 0;
-        } elseif ($nilai <= 40) {
-            return ($nilai - 30) / 10;
-        } elseif ($nilai <= 70) {
-            return 1;
-        } elseif ($nilai <= 80) {
-            return (80 - $nilai) / 10;
-        } else {
-            return 0;
-        }
-    }
-
-    private function hitungKurang($nilai)
-    {
-        if ($nilai <= 30) {
-            return 1;
-        } elseif ($nilai <= 40) {
-            return (40 - $nilai) / 10;
-        } else {
-            return 0;
-        }
-    }
-
-    private function convertOutput($output)
-    {
-        switch ($output) {
-            case 'baik':
-                return 80; // Nilai yang Anda inginkan untuk "baik"
-            case 'cukup':
-                return 60; // Nilai yang Anda inginkan untuk "cukup"
-            case 'kurang':
-                return 40; // Nilai yang Anda inginkan untuk "kurang"
-            default:
+            } elseif ($value > 70 && $value <= 80) {
+                return (80 - $value) / (80 - 70);
+            } else {
+                return 1;
+            }
+        } elseif ($subKriteria['nama'] == 'Cukup') {
+            if ($value <= 30 || $value >= 80) {
                 return 0;
+            } elseif ($value > 30 && $value <= 40) {
+                return (40 - $value) / (40 - 30);
+            } elseif ($value > 40 && $value <= 70) {
+                return 0;
+            } else {
+                return (80 - $value) / (80 - 70);
+            }
+        } else {
+            if ($value <= 30) {
+                return 1;
+            } elseif ($value > 30 && $value <= 40) {
+                return (40 - $value) / (40 - 30);
+            } else {
+                return 0;
+            }
         }
+    }
+
+    private function infer($fuzzyValues, $rules)
+    {
+        $inferenceResults = [];
+
+        foreach ($rules as $rule) {
+            $conditions = json_decode($rule['rule'], true);
+            $outputs = [];
+
+            foreach ($conditions as $kriteriaId => $subKriteriaId) {
+                $outputs[] = $fuzzyValues[$kriteriaId][$subKriteriaId];
+            }
+
+            $inferenceResults[] = [
+                'output' => $rule['output'],
+                'value' => min($outputs)
+            ];
+        }
+
+        return $inferenceResults;
+    }
+
+    private function defuzzify($inferenceResults)
+    {
+        $numerator = 0;
+        $denominator = 0;
+
+        foreach ($inferenceResults as $result) {
+            $value = 0;
+
+            switch ($result['output']) {
+                case 'sangat baik':
+                    $value = 90;
+                    break;
+                case 'baik':
+                    $value = 75;
+                    break;
+                case 'cukup':
+                    $value = 50;
+                    break;
+                case 'kurang':
+                    $value = 25;
+                    break;
+                case 'sangat kurang':
+                    $value = 10;
+                    break;
+            }
+
+            $numerator += $result['value'] * $value;
+            $denominator += $result['value'];
+        }
+
+        return $denominator == 0 ? 0 : $numerator / $denominator;
     }
 }
-
-// Instansiasi objek dan panggil metode index untuk menjalankan perhitungan
-$controller = new PerhitunganController();
-$controller->index();
