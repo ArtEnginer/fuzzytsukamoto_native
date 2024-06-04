@@ -15,6 +15,13 @@ class PerhitunganController
 
     public function __construct()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . base_url() . 'auth/login');
+            exit();
+        }
         $koneksi = new Koneksi();
         $this->penilaianModel = new PenilaianModel($koneksi);
         $this->kriteriaModel = new KriteriaModel($koneksi);
@@ -58,15 +65,28 @@ class PerhitunganController
                 'inference' => $inferenceResults,
             ];
         }
-        $data = [
-            'title' => 'Perhitungan',
-            'active' => $this->active,
-            'penilaians' => $penilaians,
-            'alternatifs' => $alternatifs,
-            'kriterias' => $kriterias,
-            'results' => $results,
-            'content' => 'Views/perhitungan/index.php'
-        ];
+
+        if (isset($_GET['hasil'])) {
+            $data = [
+                'title' => 'Perhitungan',
+                'active' => $this->active,
+                'penilaians' => $penilaians,
+                'alternatifs' => $alternatifs,
+                'kriterias' => $kriterias,
+                'results' => $results,
+                'content' => 'Views/perhitungan/hasil.php'
+            ];
+        } else {
+            $data = [
+                'title' => 'Perhitungan',
+                'active' => $this->active,
+                'penilaians' => $penilaians,
+                'alternatifs' => $alternatifs,
+                'kriterias' => $kriterias,
+                'results' => $results,
+                'content' => 'Views/perhitungan/index.php'
+            ];
+        }
 
 
         include_once('Views/Layout/index.php');

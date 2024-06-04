@@ -7,13 +7,13 @@ class KriteriaController
 
     public function __construct()
     {
-        // if (session_status() == PHP_SESSION_NONE) {
-        //     session_start();
-        // }
-        // if (!isset($_SESSION['user'])) {
-        //     header('Location: ' . base_url() . 'auth/login');
-        //     exit();
-        // }
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . base_url() . 'auth/login');
+            exit();
+        }
         $koneksi = new Koneksi();
         $this->KriteriaModel = new KriteriaModel($koneksi);
         $this->active = 'kriteria';

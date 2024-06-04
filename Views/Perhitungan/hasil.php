@@ -8,49 +8,48 @@
                     <div class="app-card-header-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="app-card-title">Rekomendasi Siswa Penerima Beasiswa</h4>
+                                <h4 class="app-card-title">Rekap Penilaian Karyawan Menggunakan FuzzyTsukamoto</h4>
                             </div>
                         </div>
                         <p>
-                            Berikut adalah hasil perhitungan menggunakan metode MOORA untuk menentukan siswa yang layak menerima beasiswa.
+                            Berikut adalah hasil perhitungan menggunakan metode Fuzzy Tsukamoto.
                         </p>
                     </div>
                 </div>
                 <div class="app-card-body p-4">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered datatable">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="2px">No</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>NILAI</th>
+                                    <th>Alternatif</th>
+                                    <th>Defuzyfikasi</th>
+                                    <th>Kategory</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                <?php foreach ($data['skor_moora'] as $nama_alternatif => $skor) : ?>
-                                    <?php $alternatif = $this->alternatifModel->find($nama_alternatif); ?>
-
-
-                                    <?php
-                                    // Hitung level kecerahan hijau berdasarkan nomor urut
-                                    $brightness = 255 - ($no * 30); // Mengurangi nilai warna hijau seiring dengan peningkatan nomor urut
-                                    $brightness = max($brightness, 0); // Pastikan nilai tidak negatif
-                                    $bg_color = "background-color: rgb(0, $brightness, 0);"; // Warna hijau dengan kecerahan yang berbeda-beda
-                                    ?>
-                                    <tr style="<?= $no <= 3 ? $bg_color : '' ?>">
-                                        <td><?= $no++ ?></td>
+                                <?php foreach ($results as $result) : ?>
+                                    <?php $alternatif = $this->alternatifModel->find($result['alternatif']); ?>
+                                    <tr>
                                         <td><?= $alternatif['nama'] ?></td>
-                                        <td><?= $alternatif['kelas'] ?></td>
-                                        <td><?= $alternatif['jenis_kelamin'] ?></td>
-                                        <td><?= $skor ?></td>
+                                        <td>
+                                            <?= $result['nilai'] ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($result['nilai'] >= 0 && $result['nilai'] <= 20) : ?>
+                                                Sangat Kurang
+                                            <?php elseif ($result['nilai'] > 20 && $result['nilai'] <= 40) : ?>
+                                                Kurang
+                                            <?php elseif ($result['nilai'] > 40 && $result['nilai'] <= 60) : ?>
+                                                Cukup
+                                            <?php elseif ($result['nilai'] > 60 && $result['nilai'] <= 80) : ?>
+                                                Baik
+                                            <?php elseif ($result['nilai'] > 80 && $result['nilai'] <= 100) : ?>
+                                                Sangat Baik
+                                            <?php endif; ?>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
-
-
                         </table>
                     </div>
                 </div>

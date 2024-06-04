@@ -13,7 +13,7 @@
                     <tr>
                         <th width="2px">No</th>
                         <th>Nama</th>
-                        <th>Sub Kriteria</th>
+                        <th>Linguistik</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

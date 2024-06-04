@@ -74,6 +74,18 @@
         <span class="nav-link-text">Hasil</span>
     </a>
 </div>
+
+<!-- user -->
+<div class="col-auto">
+    <a class="nav-link" href="<?= base_url() ?>user/index">
+        <span class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5 1a5 5 0 0 0-10 0v1a5 5 0 0 0 10 0v1a5 5 0 0 0 10 0v1a5 5 0 0 0-10 0v-1z" />
+            </svg>
+        </span>
+        <span class="nav-link-text">User</span>
+    </a>
+</div>
 <!-- logout -->
 <div class="col-auto">
     <a class="nav-link" href="<?= base_url() ?>auth/logout">
