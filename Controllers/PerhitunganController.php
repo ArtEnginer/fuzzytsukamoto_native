@@ -21,6 +21,7 @@ class PerhitunganController
         $this->subKriteriaModel = new SubKriteriaModel($koneksi);
         $this->alternatifModel = new AlternatifModel($koneksi);
         $this->ruleModel = new RulesModel($koneksi);
+        $this->active = 'perhitungan';
     }
 
     public function index()
@@ -52,13 +53,23 @@ class PerhitunganController
 
             $results[] = [
                 'alternatif' => $penilaian['alternatif_id'],
-                'nilai' => $defuzzifiedValue
+                'nilai' => $defuzzifiedValue,
+                'fuzzy' => $fuzzyValues,
+                'inference' => $inferenceResults,
             ];
         }
+        $data = [
+            'title' => 'Perhitungan',
+            'active' => $this->active,
+            'penilaians' => $penilaians,
+            'alternatifs' => $alternatifs,
+            'kriterias' => $kriterias,
+            'results' => $results,
+            'content' => 'Views/perhitungan/index.php'
+        ];
 
-        die(json_encode($results));
 
-        return $results;
+        include_once('Views/Layout/index.php');
     }
 
     private function fuzzify($value, $subKriteria)
