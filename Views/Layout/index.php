@@ -24,6 +24,12 @@
                     SPK PENILAIAN KARYAWAN MENGGUNAKAN FUZZY LOGIC TSUKAMOTO
                 </h3>
             </div>
+            <!-- logo -->
+            <div class="col-md-12 card-body">
+                <div class="text-center">
+                    <img src="<?= base_url() ?>/assets/images/logo.png" alt="logo" class="img-fluid" style="width: 50px;">
+                </div>
+            </div>
             <div class="col-md-12 card-body ">
                 <div class="display-flex">
                     <div class="row justify-content-between align-items-center">

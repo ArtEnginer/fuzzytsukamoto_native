@@ -109,8 +109,9 @@
 </head>
 
 <body>
-    <div class="background-animation">MOORA</div>
+    <div class="background-animation">FUZZY TSUKAMOTO</div>
     <div class="login-container">
+        <!-- logo img -->
         <h2>Login</h2>
         <form action="" method="post">
             <label for="username">Username:</label>
