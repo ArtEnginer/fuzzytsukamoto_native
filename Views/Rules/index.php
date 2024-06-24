@@ -22,7 +22,20 @@
                     foreach ($data['items'] as $item) : ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $data['displayRules']->displayRule($item['rule']); ?> <?= $item['output'] ?></td>
+                            <td>
+                                <?php
+                                $rule = json_decode($item['rule'], true); // Decodes JSON string into PHP array
+                                $rule = array_map(function ($item) {
+                                    return $item;
+                                }, $rule); // This doesn't change the structure of $rule
+
+                                $rule = array_values($rule); // Re-indexes the array numerically
+                                $rule = implode(' AND ', $rule); // Tries to implode the array into a string
+                                echo $rule; // Outputs the imploded string
+                                ?>
+                                Output : <?= $item['output'] ?> <!-- Outputs the 'output' field from $item -->
+                            </td>
+
                             <td>
                                 <a href="<?= base_url() ?>rules/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
                                     <i class="fa fa-edit"></i></a>

@@ -27,7 +27,7 @@
                                         <select name="kriteria<?= $value['id'] ?>" id="kriteria<?= $value['id'] ?>" class="form-control">
                                             <option value="">Pilih <?= $value['nama'] ?></option>
                                             <?php foreach ($subkriteria as $key => $item) : ?>
-                                                <option value="<?= $item['id'] ?>" <?php if ($data['rule'][$value['id']] == $item['id']) echo 'selected'; ?>><?= $item['nama'] ?></option>
+                                                <option value="<?= $item['nama'] ?>" <?php if ($data['rule'][$value['id']] == $item['nama']) echo 'selected'; ?>><?= $item['nama'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     <?php endforeach; ?>

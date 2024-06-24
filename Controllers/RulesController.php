@@ -29,7 +29,6 @@ class RulesController
             'title' => 'Daftar Rules',
             'active' => $this->active,
             'items' => $this->RulesModel->all(),
-            'displayRules' => $this,
             'content' => 'Views/Rules/index.php',
         ];
         include_once('Views/Layout/index.php');
@@ -48,8 +47,10 @@ class RulesController
 
         if ($_POST) {
             $rule = [];
+            // Loop untuk mengambil nilai kriteria yang ada
             foreach ($_POST as $key => $value) {
-                if (strpos($key, 'kriteria') !== false) {
+                // Cek apakah $key adalah kriteria (diasumsikan jika dimulai dengan "kriteria")
+                if (strpos($key, 'kriteria') === 0) {
                     // Mendapatkan ID kriteria dari nama field
                     $kriteriaId = str_replace('kriteria', '', $key);
                     $rule[$kriteriaId] = $value;
@@ -116,22 +117,5 @@ class RulesController
         $id = $_GET['id'];
         $this->RulesModel->delete($id);
         header('Location: ' . base_url() . 'rules/index');
-    }
-
-    // Additional function to convert rule JSON to readable format
-    public function displayRule($ruleJson)
-    {
-        $ruleArray = json_decode($ruleJson, true);
-        $result = "IF ";
-
-        foreach ($ruleArray as $kriteriaId => $subkriteriaId) {
-            $kriteriaName = $this->KriteriaModel->show($kriteriaId)['nama'];
-            $subkriteriaName = $this->SubKriteriaModel->find($subkriteriaId)['nama'];
-            $result .= "{$kriteriaName} $subkriteriaName AND ";
-        }
-
-        $result = rtrim($result, ' AND ') . " THEN";
-
-        return $result;
     }
 }

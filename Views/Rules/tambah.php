@@ -26,7 +26,7 @@
                                         <select name="kriteria<?= $value['id'] ?>" id="kriteria<?= $value['id'] ?>" class="form-control">
                                             <option value="">Pilih <?= $value['nama'] ?></option>
                                             <?php foreach ($subkriteria as $key => $item) : ?>
-                                                <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
+                                                <option value="<?= $item['nama'] ?>"><?= $item['nama'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     <?php endforeach; ?>
