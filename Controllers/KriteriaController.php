@@ -25,6 +25,7 @@ class KriteriaController
             'title' => 'Daftar Kriteria',
             'active' => $this->active,
             'items' => $this->KriteriaModel->all(), // Use $this->KriteriaModel
+            'jml_kriteria' => $this->KriteriaModel->count(), // Use $this->KriteriaModel
             'content' => 'Views/Kriteria/index.php',
         ];
 

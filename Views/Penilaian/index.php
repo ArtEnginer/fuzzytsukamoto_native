@@ -41,6 +41,10 @@ foreach ($data['alternatif'] as $a) {
                                 <a href="<?= base_url() ?>penilaian/delete?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm text-white">
                                     <i class="fa fa-trash text-white"></i>
                                 </a>
+                                <!-- detail -->
+                                <a href="<?= base_url() ?>perhitungan/index?id=<?= $item['id'] ?>" class="btn btn-info btn-sm text-white">
+                                    <i class="fa fa-info text-white"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

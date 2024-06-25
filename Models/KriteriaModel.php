@@ -89,4 +89,12 @@ class KriteriaModel
         $result = $this->koneksi->query($query);
         return $result->num_rows > 0;
     }
+
+    public function count()
+    {
+        $query = "SELECT COUNT(*) as total FROM $this->table";
+        $result = $this->koneksi->query($query);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
 }

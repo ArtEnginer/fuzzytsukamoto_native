@@ -1,46 +1,5 @@
 <?php require_once("Views/Layout/index.php"); ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="app-card shadow-sm mb-4 border-left-decoration">
-            <div class="inner">
-                <div class="app-card-header p-4">
-                    <div class="app-card-header-title">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="app-card-title">Masukan Periode Perhitungan</h4>
-                            </div>
-                            <div class="col-md-6 text-end">
-                                <div class="badge bg-success">
-                                    Periode
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="app-card-body p-4">
-                    <form action="" method="POST">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <label for="periode">Periode</label>
-                                    <input type="month" class="form-control" name="periode" id="periode" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <label for="periode"></label>
-                                    <button type="submit" class="btn btn-primary form-control text-white">Proses</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -62,34 +21,28 @@
                     </div>
                 </div>
                 <div class="app-card-body p-4">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered datatable">
-                            <thead>
-                                <tr>
-                                    <th width="2px">No</th>
-                                    <th>Alternatif</th>
-                                    <?php foreach ($data['kriterias'] as $kriteria) : ?>
-                                        <th><?= $kriteria['nama'] ?></th>
-                                    <?php endforeach; ?>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 1; ?>
-                                <?php foreach ($data['penilaians'] as $penilaian) : ?>
-                                    <?php
-                                    $nilai = json_decode($penilaian['nilai'], true);
-                                    $alternatif = $this->alternatifModel->find($penilaian['alternatif_id']);
-                                    ?>
-                                    <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $alternatif['nama'] ?></td>
-                                        <?php foreach ($nilai as $n) : ?>
-                                            <td><?= $n ?></td>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                    <div class="app-card-body">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">
+                                    <?= $data['alternatif']->find($data['penilaian']['alternatif_id'])['nama'] ?>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <?php $nilai = json_decode($data['penilaian']['nilai']);
+                                foreach ($nilai as $key => $value) : ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>Kriteria <?= $key ?></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?= $value ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach;
+                                ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,14 +56,14 @@
                     <div class="app-card-header-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="app-card-title">Inferensi</h4>
+                                <h4 class="app-card-title">Rules</h4>
                             </div>
                             <div class="col-md-6 text-end">
                                 <div class="badge bg-success">Langkah 2</div>
                             </div>
                         </div>
                         <p>
-                            Berikut adalah hasil inferensi dari nilai karyawan.
+                            Berikut adalah hasil Rules Fuzzy dari nilai karyawan.
                         </p>
                     </div>
                 </div>
@@ -120,22 +73,27 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Alternatif</th>
-                                    <th>Inferensi</th>
-                                </tr>
+                                    <th>No</th>
+                                    <th>K1</th>
+                                    <th>K2</th>
+                                    <th>K3</th>
+                                    <th>Output</th>
+                                    <th>𝜶 − 𝒑𝒓e</th>
+                                    <th>Z</th>
+                                    <th>𝜶 − 𝒑𝒓𝒆 ∗ Z</th>
                             </thead>
                             <tbody>
-                                <?php foreach ($results as $result) : ?>
-                                    <?php $alternatif = $this->alternatifModel->find($result['alternatif']); ?>
+                                <?php $no = 1;
+                                foreach ($data['hasil'] as $hasil) : ?>
                                     <tr>
-                                        <td><?= $alternatif['nama'] ?></td>
-                                        <td>
-                                            <ul>
-                                                <?php foreach ($result['inference'] as $inference) : ?>
-                                                    <li><?= $inference['output'] ?>: <?= $inference['value'] ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </td>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $hasil['K1'] ?></td>
+                                        <td><?= $hasil['K2'] ?></td>
+                                        <td><?= $hasil['K3'] ?></td>
+                                        <td><?= $hasil['Output'] ?></td>
+                                        <td><?= $hasil['nilai_terendah'] ?></td>
+                                        <td><?= $hasil['z'] ?></td>
+                                        <td><?= $hasil['alpha_z'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -162,46 +120,37 @@
                         <p>
                             Berikut adalah hasil defuzzifikasi dari hasil inferensi.
                         </p>
+                        <code>𝑍 =∑(𝑎_𝑝𝑖 ∗ 𝑧𝑖)/∑ 𝑎_𝑝re</code>
                     </div>
                 </div>
                 <div class="app-card-body p-4">
                     <div class="app-card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Alternatif</th>
-                                    <th>Defuzyfikasi</th>
-                                    <th>Kategory</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($results as $result) : ?>
-                                    <?php $alternatif = $this->alternatifModel->find($result['alternatif']); ?>
-                                    <tr>
-                                        <td><?= $alternatif['nama'] ?></td>
-                                        <td>
-                                            <?= $result['nilai'] ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($result['nilai'] >= 0 && $result['nilai'] <= 20) : ?>
-                                                Sangat Kurang
-                                            <?php elseif ($result['nilai'] > 20 && $result['nilai'] <= 40) : ?>
-                                                Kurang
-                                            <?php elseif ($result['nilai'] > 40 && $result['nilai'] <= 60) : ?>
-                                                Cukup
-                                            <?php elseif ($result['nilai'] > 60 && $result['nilai'] <= 80) : ?>
-                                                Baik
-                                            <?php elseif ($result['nilai'] > 80 && $result['nilai'] <= 100) : ?>
-                                                Sangat Baik
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">
+                                    Hasil
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Hasil Defuzzifikasi</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?= $data['z'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Kategori</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?= $data['kategori'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>

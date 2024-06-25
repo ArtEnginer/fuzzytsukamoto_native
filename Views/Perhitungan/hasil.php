@@ -61,32 +61,17 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Alternatif</th>
+                                    <th>Nama</th>
                                     <th>Defuzyfikasi</th>
                                     <th>Kategory</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($results as $result) : ?>
-                                    <?php $alternatif = $this->alternatifModel->find($result['alternatif']); ?>
+                                <?php foreach ($data['penilaian'] as $result) : ?>
                                     <tr>
-                                        <td><?= $alternatif['nama'] ?></td>
-                                        <td>
-                                            <?= $result['nilai'] ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($result['nilai'] >= 0 && $result['nilai'] <= 20) : ?>
-                                                Sangat Kurang
-                                            <?php elseif ($result['nilai'] > 20 && $result['nilai'] <= 40) : ?>
-                                                Kurang
-                                            <?php elseif ($result['nilai'] > 40 && $result['nilai'] <= 60) : ?>
-                                                Cukup
-                                            <?php elseif ($result['nilai'] > 60 && $result['nilai'] <= 80) : ?>
-                                                Baik
-                                            <?php elseif ($result['nilai'] > 80 && $result['nilai'] <= 100) : ?>
-                                                Sangat Baik
-                                            <?php endif; ?>
-                                        </td>
+                                        <td><?= $result['nama'] ?></td>
+                                        <td><?= $result['z'] ?></td>
+                                        <td><?= $result['kategori'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

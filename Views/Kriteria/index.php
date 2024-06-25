@@ -3,8 +3,15 @@
 <?php echo $data['title'] ?>
 <div class="card">
     <div class="card-header">
-        <a href="<?= base_url() ?>kriteria/tambah" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus"></i></a>
+        <?php if ($data['jml_kriteria'] == 3) : ?>
+            <p class="text-danger">Nilai kriteria Max Count 3
+            </p>
+        <?php else : ?>
+            <a href="<?= base_url() ?>kriteria/tambah" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i></a>
+        <?php endif ?>
+
+
     </div>
     <div class="card-body">
         <div class="table-responsive">

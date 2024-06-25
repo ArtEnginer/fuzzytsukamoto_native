@@ -56,7 +56,7 @@
     </div>
 <?php endif; ?>
 <?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'user') : ?>
-
+    <!-- 
     <div class="col-auto">
         <a class="nav-link <?= ($active == "perhitungan") ? "active" : ""; ?> ?>" href="<?= base_url() ?>perhitungan/index">
             <span class="nav-icon">
@@ -67,9 +67,9 @@
             </span>
             <span class="nav-link-text">Perhitungan</span>
         </a>
-    </div>
+    </div> -->
     <div class="col-auto">
-        <a class="nav-link <?= ($active == "hasil") ? "active" : ""; ?> ?>" href="<?= base_url() ?>perhitungan/index?hasil=1">
+        <a class="nav-link <?= ($active == "hasil") ? "active" : ""; ?> ?>" href="<?= base_url() ?>perhitungan/hasil">
             <span class="nav-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-bar-graph" viewBox="0 0 16 16">
                     <path d="M1 0h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zm1 1v14h12V1H2zm1 1h10v1H3V2zm1 2v10h1V3H4zm1 1h8v1H5V4zm1 2v8h1V6H6zm1 1h6v1H7V7zm1 2v6h1V9H8zm1 1h4v1H9V10zm1 2v4h1v-4H10zm1 1h2v1h-2v-1z" />

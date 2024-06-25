@@ -25,10 +25,41 @@ class RulesController
 
     public function index()
     {
+        $rules = [
+            ['K1' => 'Baik', 'K2' => 'Baik', 'K3' => 'Baik', 'Output' => 'Baik'],
+            ['K1' => 'Baik', 'K2' => 'Baik', 'K3' => 'Cukup', 'Output' => 'Baik'],
+            ['K1' => 'Baik', 'K2' => 'Baik', 'K3' => 'Kurang', 'Output' => 'Cukup'],
+            ['K1' => 'Baik', 'K2' => 'Cukup', 'K3' => 'Baik', 'Output' => 'Baik'],
+            ['K1' => 'Baik', 'K2' => 'Cukup', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Baik', 'K2' => 'Cukup', 'K3' => 'Kurang', 'Output' => 'Cukup'],
+            ['K1' => 'Baik', 'K2' => 'Kurang', 'K3' => 'Baik', 'Output' => 'Cukup'],
+            ['K1' => 'Baik', 'K2' => 'Kurang', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Baik', 'K2' => 'Kurang', 'K3' => 'Kurang', 'Output' => 'Kurang'],
+            ['K1' => 'Cukup', 'K2' => 'Baik', 'K3' => 'Baik', 'Output' => 'Baik'],
+            ['K1' => 'Cukup', 'K2' => 'Baik', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Baik', 'K3' => 'Kurang', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Cukup', 'K3' => 'Baik', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Cukup', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Cukup', 'K3' => 'Kurang', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Kurang', 'K3' => 'Baik', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Kurang', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Cukup', 'K2' => 'Kurang', 'K3' => 'Kurang', 'Output' => 'Kurang'],
+            ['K1' => 'Kurang', 'K2' => 'Baik', 'K3' => 'Baik', 'Output' => 'Cukup'],
+            ['K1' => 'Kurang', 'K2' => 'Baik', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Kurang', 'K2' => 'Baik', 'K3' => 'Kurang', 'Output' => 'Kurang'],
+            ['K1' => 'Kurang', 'K2' => 'Cukup', 'K3' => 'Baik', 'Output' => 'Cukup'],
+            ['K1' => 'Kurang', 'K2' => 'Cukup', 'K3' => 'Cukup', 'Output' => 'Cukup'],
+            ['K1' => 'Kurang', 'K2' => 'Cukup', 'K3' => 'Kurang', 'Output' => 'Kurang'],
+            ['K1' => 'Kurang', 'K2' => 'Kurang', 'K3' => 'Baik', 'Output' => 'Kurang'],
+            ['K1' => 'Kurang', 'K2' => 'Kurang', 'K3' => 'Cukup', 'Output' => 'Kurang'],
+            ['K1' => 'Kurang', 'K2' => 'Kurang', 'K3' => 'Kurang', 'Output' => 'Kurang'],
+        ];
+
+
         $data = [
-            'title' => 'Daftar Rules',
-            'active' => $this->active,
-            'items' => $this->RulesModel->all(),
+            'title'   => 'Daftar Rules',
+            'active'  => $this->active,
+            'items'   => $rules,
             'content' => 'Views/Rules/index.php',
         ];
         include_once('Views/Layout/index.php');
