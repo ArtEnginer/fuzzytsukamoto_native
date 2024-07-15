@@ -20,7 +20,7 @@
                     <tr>
                         <th width="2px">No</th>
                         <th>Nama</th>
-                        <th>Linguistik</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

@@ -22,7 +22,7 @@ class SubKriteriaController
     public function index()
     {
         $data = [
-            'title' => 'Daftar SubKriteria',
+            'title' => 'Daftar Kategori',
             'active' => $this->active,
             'items' => $this->SubKriteriaModel->show_with_k($_GET['idk']),
             'content' => 'Views/SubKriteria/index.php',
@@ -35,7 +35,7 @@ class SubKriteriaController
     public function tambah()
     {
         $data = [
-            'title' => 'Tambah Daftar Kriteria',
+            'title' => 'Tambah Daftar Kategori',
             'active' => $this->active,
             'idk' => $_GET['idk'],
             'content' => 'Views/SubKriteria/tambah.php',
@@ -67,7 +67,7 @@ class SubKriteriaController
     {
         $id = $_GET['id'];
         $data = [
-            'title' => 'Edit Daftar SubKriteria',
+            'title' => 'Edit Daftar Kategori',
             'active' => $this->active,
             'item' => $this->SubKriteriaModel->find($id),
             'content' => 'Views/SubKriteria/edit.php',

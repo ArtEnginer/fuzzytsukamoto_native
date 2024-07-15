@@ -138,8 +138,10 @@ class PerhitunganController
     public function hasil()
     {
         $dataNilai = $this->PenilaianModel->all();
+        $periode = date('Y-m');
         if (isset($_POST['periode'])) {
-            $dataNilai = $this->PenilaianModel->getByPeriode($_POST['periode']);
+            $periode = $_POST['periode'];
+            $dataNilai = $this->PenilaianModel->getByPeriode($periode);
         }
         $alternatif = $this->alternatifModel->all();
 
@@ -223,6 +225,7 @@ class PerhitunganController
             $sum_alpha_z = array_sum($alpha_z);
             $sum_alpha = array_sum($nilai_terendah);
             $z = $sum_alpha_z / $sum_alpha;
+            $z = number_format($z, 2);
 
             if ($z <= 60) {
                 $kategori = 'Kurang';
@@ -245,6 +248,7 @@ class PerhitunganController
             'title' => 'Hasil',
             'active' => $this->active,
             'penilaian' => $hasil,
+            'periode' => $periode,
             'content' => 'Views/Perhitungan/hasil.php',
         ];
 
