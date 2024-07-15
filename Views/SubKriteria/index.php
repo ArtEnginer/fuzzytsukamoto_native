@@ -7,9 +7,9 @@
         <a href="<?= base_url() ?>kriteria/index" class="btn btn-secondary btn-sm">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <a href="<?= base_url() ?>subkriteria/tambah?idk=<?= $data['idk'] ?>" class="btn btn-primary btn-sm">
+        <!-- <a href="<?= base_url() ?>subkriteria/tambah?idk=<?= $data['idk'] ?>" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-        </a>
+        </a> -->
 
 
     </div>

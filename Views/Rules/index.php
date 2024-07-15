@@ -8,7 +8,7 @@
         </a> -->
 
         <!-- note nilai rules tidak dapat diubah karena bersifat const -->
-        <p class="text-danger">Nilai Rules tidak dapat diubah karena bersifat const</p>
+        <!-- <p class="text-danger">Nilai Rules tidak dapat diubah karena bersifat const</p> -->
     </div>
     <div class="card-body">
         <div class="table-responsive">
