@@ -33,9 +33,9 @@
                                 <a href="<?= base_url() ?>subkriteria/edit?id=<?= $item['id'] ?>" class="btn btn-warning btn-sm text-white">
                                     <i class="fa fa-edit"></i></a>
                                 </a>
-                                <a href="<?= base_url() ?>subkriteria/delete?id=<?= $item['id'] ?>&idk=<?= $item['kriteria_id'] ?>" class="btn btn-danger btn-sm text-white">
+                                <!-- <a href="<?= base_url() ?>subkriteria/delete?id=<?= $item['id'] ?>&idk=<?= $item['kriteria_id'] ?>" class="btn btn-danger btn-sm text-white">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                     <?php endforeach; ?>
